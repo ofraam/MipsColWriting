@@ -1226,11 +1226,11 @@ def runEvalOnFolder(folderName, generateMIPs = True):
 #                    writeResultsToFile(results, resFileName)
                     
                     results2 = evaluateGeneralParagraphRankingForAuthors(current_pickle,pickle_file_name[:-4])
-                    resFileName2 = "author_predictions_dec24_sigEdits08/"+ pickle_file_name[:-4] + "_live_predictions_sigEdits08.csv"
+                    resFileName2 = "author_predictions"+ pickle_file_name[:-4] + "_live_predictions_sigEdits08.csv"
                     writeResultsToFile(results2, resFileName2)
                      
                     results1 = evaluateChangesForAuthors(current_pickle,pickle_file_name[:-4])
-                    resFileName1 = "author_predictions_dec24_sigEdits08/"+ pickle_file_name[:-4] + "_changes_predictions_sigEdits08.csv"
+                    resFileName1 = "author_predictions/"+ pickle_file_name[:-4] + "_changes_predictions_sigEdits08.csv"
                     
                     writeResultsToFile(results1, resFileName1)
                    
@@ -1248,7 +1248,7 @@ eval funcs end
 
 if __name__ == '__main__':
     
-    runEvalOnFolder('pickles', False)
+    runEvalOnFolder('pickles', True)
 #    runEvalOnArticle('Absolute_pitch.pkl', False)
    
     #load necessary data
