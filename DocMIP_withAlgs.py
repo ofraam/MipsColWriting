@@ -1133,11 +1133,9 @@ def recallAtN(actual, predicted, n):
     for c in actual:
         if c in predPruned:
             retreived= retreived+1
-    recall = retreived/len(actual)
     recall1 = recall(set(actual), set(predicted[:n]))
-    if (recall!=recall1):
-        print 'interesting'
-    return recall
+
+    return recall1
 '''
 ------------------------------------------------------
 evaluation metrics end
