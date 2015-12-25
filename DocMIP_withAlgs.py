@@ -3,7 +3,7 @@ Created on Jan 25, 2015
 
 @author: Ofra
 '''
-
+import glob
 import version 
 #from version import Version
 #from version import Page
@@ -1195,7 +1195,7 @@ def runEvalOnArticle(pickle_file_name,generateMIPs = False):
             traceback.print_exc() 
         return
 
-def runEvalOnFolder(folderName, generateMIPs = True):
+def runEvalOnFolder(folderName, generateMIPs = True, removeFiles = True):
         for a in os.walk(folderName):
             for pickle_file_name in a[2]:
                 
@@ -1230,10 +1230,19 @@ def runEvalOnFolder(folderName, generateMIPs = True):
                     resFileName1 = "author_predictions/"+ pickle_file_name[:-4] + "_changes_predictions_sigEdits08.csv"
                     
                     writeResultsToFile(results1, resFileName1)
+                    
+                  
                    
                 except:
                     print "Unexpected error:", sys.exc_info()[0]
-                    traceback.print_exc()   
+                    traceback.print_exc()
+                    
+                #remove pickle files to save space
+                if (removeFiles):
+                    files = glob.glob('mip_pickles/*')
+                    for f in files:
+                        os.remove(f)
+                         
             return 
 '''
 -----------------------------------------------------------------------------
@@ -1244,7 +1253,6 @@ eval funcs end
 
 
 if __name__ == '__main__':
-    
     runEvalOnFolder('pickles', True)
 #    runEvalOnArticle('Absolute_pitch.pkl', False)
    
