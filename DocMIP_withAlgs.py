@@ -635,9 +635,7 @@ def evaluateGeneralParagraphRankingForAuthors(articleRevisions, articleName):
 #    last_author_revs[articleRevisions.revisions[0].author] = 0 #initialize with first author
 #    for i in range(len(articleRevisions.revisions)):
     results = []
-#    for i in range(2,len(articleRevisions.revisions)):
-    for i in range(2,14):
-
+    for i in range(2,len(articleRevisions.revisions)):
         j=0
         print i
         mip = readMIPfromFile(articleName,i-1) #taking the mip up until the last author, so we can look at all current paragraph and rank them for the user. 
@@ -776,8 +774,7 @@ def evaluateChangesForAuthors(articleRevisions, articleName):
 #    last_author_revs[articleRevisions.revisions[0].author] = 0 #initialize with first author
 #    for i in range(len(articleRevisions.revisions)):
     results = []
-#    for i in range(len(articleRevisions.revisions)):
-    for i in range(14):
+    for i in range(len(articleRevisions.revisions)):
         j=0
 #        print i
         mip = readMIPfromFile(articleName,i) #taking the mip including the current author, but the ranking changes function will do the right thing (rank until the previous session)
@@ -1157,8 +1154,8 @@ def generateMIPpicklesForArticles(articleRevisions, articleName, startFrom = 1):
     print "writing file "+str(pickle_file_name)
     cPickle.dump(mip, pkl_file)
     pkl_file.close()
-#    for i in range(startFrom,len(articleRevisions.revisions)):
-    for i in range(1,15):
+    for i in range(startFrom,len(articleRevisions.revisions)):
+#    for i in range(1,15):
 
         #try to read from mip, if it already exists no need to recompute
         try: 
