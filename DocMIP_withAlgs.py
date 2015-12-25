@@ -13,6 +13,8 @@ import cPickle, copy,  difflib, gensim, jellyfish
 import Levenshtein, nltk, nltk.data, numpy as np, os, re
 from difflib import SequenceMatcher
 from gensim import corpora, models, similarities
+import nltk
+nltk.download()
 from nltk.corpus import stopwords
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
