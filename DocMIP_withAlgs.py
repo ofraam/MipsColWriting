@@ -1119,7 +1119,7 @@ def precisionAtN(actual, predicted, n):
 
     prec = right/min(n,len(predicted))
     
-    prec2 = nltk.metrics.scores.precision(set(actual), set(predicted[:n]))
+    prec2 = precision(set(actual), set(predicted[:n]))
    
     
     if (prec!=prec2):
@@ -1134,7 +1134,7 @@ def recallAtN(actual, predicted, n):
         if c in predPruned:
             retreived= retreived+1
     recall = retreived/len(actual)
-    recall1 = nltk.metrics.scores.recall(set(actual), set(predicted[:n]))
+    recall1 = recall(set(actual), set(predicted[:n]))
     if (recall!=recall1):
         print 'interesting'
     return recall
