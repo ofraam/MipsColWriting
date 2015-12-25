@@ -720,12 +720,12 @@ def evaluateGeneralParagraphRankingForAuthors(articleRevisions, articleName):
                     changedObjects = generateChangeListWithObjectIDsJustAO(changeListFull)
 #                    print 'change list set: '+str(changedObjects)
 
-                    cur_author= cur_author.encode('utf-8')
+                    cur_authorForPrint= cur_author.encode('utf-8')
                     for k in range(1,len(changedObjects)+1): #TODO check makes sense
                         resultsForRanking = []
                         resultsForRanking.append(rank) #add name of ranker for writing to file later
                         resultsForRanking.append(i)                    
-                        resultsForRanking.append(cur_author)
+                        resultsForRanking.append(cur_authorForPrint)
                         resultsForRanking.append(author_rev_counts[cur_author])
                         resultsForRanking.append(prediction_type)
                         resultsForRanking.append(len(actualEdits))
@@ -740,7 +740,7 @@ def evaluateGeneralParagraphRankingForAuthors(articleRevisions, articleName):
                         resultsForRanking = []
                         resultsForRanking.append(rank) #add name of ranker for writing to file later
                         resultsForRanking.append(i)                    
-                        resultsForRanking.append(cur_author)
+                        resultsForRanking.append(cur_authorForPrint)
                         resultsForRanking.append(author_rev_counts[cur_author])
                         resultsForRanking.append(prediction_type)
                         resultsForRanking.append(len(actualEdits))
@@ -790,7 +790,7 @@ def evaluateChangesForAuthors(articleRevisions, articleName):
                 
                 
                 rankings = {}
-                cur_author= cur_author.encode('utf-8')
+                cur_authorForPrint= cur_author.encode('utf-8')
                 rankings["doi_alpha1_beta0"] = mip.rankChangesForUser(cur_author,last_author_revs[cur_author]+1,False,alpha = 1.0, beta = 0.0)
                 rankings["doi_alpha0_beta1"] = mip.rankChangesForUser(cur_author,last_author_revs[cur_author]+1,False, alpha = 0.0, beta = 1.0)
                 rankings["doi_alpha05_beta05"] = mip.rankChangesForUser(cur_author,last_author_revs[cur_author]+1,False, alpha = 0.5, beta = 0.5)
@@ -878,7 +878,7 @@ def evaluateChangesForAuthors(articleRevisions, articleName):
                         resultsForRanking = []
                         resultsForRanking.append(rank) #add name of ranker for writing to file later
                         resultsForRanking.append(i)                    
-                        resultsForRanking.append(cur_author)
+                        resultsForRanking.append(cur_authorForPrint)
                         resultsForRanking.append(author_rev_counts[cur_author])
                         resultsForRanking.append(prediction_type)
                         resultsForRanking.append(len(actualEdits)) #how many pars author changed
@@ -893,7 +893,7 @@ def evaluateChangesForAuthors(articleRevisions, articleName):
                         resultsForRanking = []
                         resultsForRanking.append(rank) #add name of ranker for writing to file later
                         resultsForRanking.append(i)                    
-                        resultsForRanking.append(cur_author)
+                        resultsForRanking.append(cur_authorForPrint)
                         resultsForRanking.append(author_rev_counts[cur_author])
                         resultsForRanking.append(prediction_type)
                         resultsForRanking.append(len(actualEdits))
