@@ -1234,17 +1234,18 @@ def runEvalOnFolder(folderName, generateMIPs = True, removeFiles = True):
                     
                     writeResultsToFile(results1, resFileName1)
                     
+                                    #remove pickle files to save space
+                    if (removeFiles):
+                        files = glob.glob('mip_pickles/*')
+                        for f in files:
+                            os.remove(f)
                   
                    
                 except:
                     print "Unexpected error:", sys.exc_info()[0]
                     traceback.print_exc()
                     
-                #remove pickle files to save space
-                if (removeFiles):
-                    files = glob.glob('mip_pickles/*')
-                    for f in files:
-                        os.remove(f)
+
                          
             return 
 '''
