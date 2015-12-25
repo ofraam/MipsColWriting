@@ -1222,12 +1222,16 @@ def runEvalOnFolder(folderName, generateMIPs = True, removeFiles = True):
 #                    resFileName = "author_predictions_may30/"+ pickle_file_name[:-4] + "_par_predictions_sigOnly.csv"
 #                    writeResultsToFile(results, resFileName)
                     
+                    print 'evaluating all live pars'
                     results2 = evaluateGeneralParagraphRankingForAuthors(current_pickle,pickle_file_name[:-4])
-                    resFileName2 = "author_predictions"+ pickle_file_name[:-4] + "_live_predictions_sigEdits08.csv"
+                    resFileName2 = "author_predictions/"+ pickle_file_name[:-4] + "_live_predictions_sigEdits08.csv"
                     writeResultsToFile(results2, resFileName2)
-                     
+                    print 'wrote all live par res to file'
+                    
+                    print 'evaluating changed pars'
                     results1 = evaluateChangesForAuthors(current_pickle,pickle_file_name[:-4])
                     resFileName1 = "author_predictions/"+ pickle_file_name[:-4] + "_changes_predictions_sigEdits08.csv"
+                    print 'wrote changed par res to file'
                     
                     writeResultsToFile(results1, resFileName1)
                     
