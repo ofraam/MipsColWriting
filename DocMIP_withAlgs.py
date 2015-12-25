@@ -9,9 +9,8 @@ import version
 #from version import Page
 import networkx as nx
 import sys 
-import cPickle, copy, custom_texttiling as ct, difflib, gensim, jellyfish
+import cPickle, copy,  difflib, gensim, jellyfish
 import Levenshtein, nltk, nltk.data, numpy as np, os, re
-from pylab import gca, Rectangle
 from difflib import SequenceMatcher
 from gensim import corpora, models, similarities
 from nltk.corpus import stopwords
