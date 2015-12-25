@@ -9,16 +9,14 @@ import version
 #from version import Page
 import networkx as nx
 import sys 
-import cPickle, copy, custom_texttiling as ct, difflib, gensim, jellyfish, matplotlib.pyplot as plt, matplotlib.cm as cm
+import cPickle, copy, custom_texttiling as ct, difflib, gensim, jellyfish
 import Levenshtein, nltk, nltk.data, numpy as np, os, re
 from pylab import gca, Rectangle
 from difflib import SequenceMatcher
 from gensim import corpora, models, similarities
 from nltk.corpus import stopwords
-from matplotlib import rcParams
 from sklearn.feature_extraction.text import CountVectorizer, TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
-import matplotlib.pyplot as plt
 import math
 import random
 from nltk import metrics
