@@ -19,6 +19,7 @@ from sklearn.metrics.pairwise import cosine_similarity
 import math
 import random
 from nltk import metrics
+from nltk import precision
 from sklearn.metrics import precision_recall_curve
 import csv
 import traceback
