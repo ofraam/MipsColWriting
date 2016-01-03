@@ -652,10 +652,11 @@ def evaluateGeneralParagraphRankingForAuthors(articleRevisions, articleName):
                 
                 rankings = {}
                 
-                rankings["doi_alpha1_beta0"] = mip.rankLiveObjectsForUser(cur_author,alpha = 1.0, beta = 0.0)
-                rankings["doi_alpha0_beta1"] = mip.rankLiveObjectsForUser(cur_author,alpha = 0.0, beta = 1.0)
-                rankings["doi_alpha05_beta05"] = mip.rankLiveObjectsForUser(cur_author,alpha = 0.5, beta = 0.5)
-                rankings["doi_alpha03_beta07"] = mip.rankLiveObjectsForUser(cur_author,alpha = 0.5, beta = 0.5)
+                rankings["doi_alpha1_beta0"] = mip.rankLiveObjectsForUser(cur_author,alpha = 1.0, beta = 0.0,similarity="edge")
+                
+                rankings["doi_alpha0_beta1"] = mip.rankLiveObjectsForUser(cur_author,alpha = 0.0, beta = 1.0,similarity="edge")
+                rankings["doi_alpha05_beta05"] = mip.rankLiveObjectsForUser(cur_author,alpha = 0.5, beta = 0.5,similarity="edge")
+                rankings["doi_alpha03_beta07"] = mip.rankLiveObjectsForUser(cur_author,alpha = 0.5, beta = 0.5,similarity="edge")
                 listOfPars =  [ row for row in rankings["doi_alpha03_beta07"] ] 
                 
                 #generate baselines rankings: random, top edit, recently edited (TODO: language model):                
@@ -673,7 +674,7 @@ def evaluateGeneralParagraphRankingForAuthors(articleRevisions, articleName):
                 if i>0:
                     j=1
                     rankings = {}
-                    rankings["doi_alpha1_beta0"] = mip.rankLiveObjectsForUser(cur_author,alpha = 1.0, beta = 0.0)
+                    rankings["doi_alpha1_beta0"] = mip.rankLiveObjectsForUser(cur_author,alpha = 1.0, beta = 0.0,similarity="edge")
                     listOfPars =  [ row for row in rankings["doi_alpha1_beta0"] ] 
                   
                     #generate baselines rankings: random, top edit, recently edited (TODO: language model):                
@@ -692,7 +693,7 @@ def evaluateGeneralParagraphRankingForAuthors(articleRevisions, articleName):
                         j = j+1
                 if i>0:
                     rankings = {}
-                    rankings["doi_alpha1_beta0"] = mip.rankLiveObjectsForUser(cur_author,alpha = 1.0, beta = 0.0)
+                    rankings["doi_alpha1_beta0"] = mip.rankLiveObjectsForUser(cur_author,alpha = 1.0, beta = 0.0,similarity="edge")
                     listOfPars =  [ row for row in rankings["doi_alpha1_beta0"] ] 
                     #generate baselines rankings: random, top edit, recently edited (TODO: language model):                
                     rankings['random'] = generateRandomRanking(listOfPars) #random
@@ -791,10 +792,10 @@ def evaluateChangesForAuthors(articleRevisions, articleName):
                 
                 rankings = {}
                 
-                rankings["doi_alpha1_beta0"] = mip.rankChangesForUser(cur_author,last_author_revs[cur_author]+1,False,alpha = 1.0, beta = 0.0)
-                rankings["doi_alpha0_beta1"] = mip.rankChangesForUser(cur_author,last_author_revs[cur_author]+1,False, alpha = 0.0, beta = 1.0)
-                rankings["doi_alpha05_beta05"] = mip.rankChangesForUser(cur_author,last_author_revs[cur_author]+1,False, alpha = 0.5, beta = 0.5)
-                rankings["doi_alpha03_beta07"] = mip.rankChangesForUser(cur_author,last_author_revs[cur_author]+1,False, alpha = 0.3, beta = 0.7)
+                rankings["doi_alpha1_beta0"] = mip.rankChangesForUser(cur_author,last_author_revs[cur_author]+1,False,alpha = 1.0, beta = 0.0,similarity="edge")
+                rankings["doi_alpha0_beta1"] = mip.rankChangesForUser(cur_author,last_author_revs[cur_author]+1,False, alpha = 0.0, beta = 1.0,similarity="edge")
+                rankings["doi_alpha05_beta05"] = mip.rankChangesForUser(cur_author,last_author_revs[cur_author]+1,False, alpha = 0.5, beta = 0.5,similarity="edge")
+                rankings["doi_alpha03_beta07"] = mip.rankChangesForUser(cur_author,last_author_revs[cur_author]+1,False, alpha = 0.3, beta = 0.7,similarity="edge")
                 listOfChangedPars =  [ row for row in rankings["doi_alpha03_beta07"] ] 
 
 
@@ -814,7 +815,7 @@ def evaluateChangesForAuthors(articleRevisions, articleName):
                 if i>0:
                     j=1
                     rankings = {}
-                    rankings["doi_alpha1_beta0"] = mip.rankChangesForUser(cur_author,max(0,i-10),False, alpha = 1.0, beta = 0.0)
+                    rankings["doi_alpha1_beta0"] = mip.rankChangesForUser(cur_author,max(0,i-10),False, alpha = 1.0, beta = 0.0,similarity="edge")
                     listOfChangedPars =  [ row for row in rankings["doi_alpha1_beta0"] ] 
                     #generate baselines rankings: random, top edit, recently edited (TODO: language model):                
                     rankings['random'] = generateRandomRanking(listOfChangedPars) #random
@@ -831,7 +832,7 @@ def evaluateChangesForAuthors(articleRevisions, articleName):
                         j = j+1
                 if i>0:
                     rankings = {}
-                    rankings["doi_alpha1_beta0"] = mip.rankChangesForUser(cur_author,max(0,i-10),False, alpha = 1.0, beta = 0.0)
+                    rankings["doi_alpha1_beta0"] = mip.rankChangesForUser(cur_author,max(0,i-10),False, alpha = 1.0, beta = 0.0,similarity="edge")
                     listOfChangedPars =  [ row for row in rankings["doi_alpha1_beta0"] ] 
                    
                     #generate baselines rankings: random, top edit, recently edited (TODO: language model):                
@@ -1201,35 +1202,22 @@ def runEvalOnFolder(folderName, generateMIPs = True, removeFiles = True):
             
                 current_pickle = get_pickle(pickle_file_name)
                 print len(current_pickle.revisions)
-                
-            #    mip = Mip(current_pickle.revisions[0])
-            #    mip.initializeMIP()
-            #    pickle_file_name = "Yale_University_0"
-            #    mip_file = os.path.join(os.getcwd(), "mip_pickles", pickle_file_name)
-            #    pkl_file = open(mip_file, 'wb')
-            #    print "writing file "+str(pickle_file_name)
-            #    cPickle.dump(mip, pkl_file)
-            #    pkl_file.close()
-                #generate mip pickles
+
                 try:
                     if generateMIPs == True:        
                         generateMIPpicklesForArticles(current_pickle,pickle_file_name[:-4])
                         print 'generated all MIPs'
                     
-                #    results = evaluateChangesForAuthors(current_pickle,"johann_pachelbel")
-#                    results = evaluateGeneralParagraphRankingForAuthors(current_pickle,pickle_file_name[:-4])
-#                    resFileName = "author_predictions_may30/"+ pickle_file_name[:-4] + "_par_predictions_sigOnly.csv"
-#                    writeResultsToFile(results, resFileName)
                     
                     print 'evaluating all live pars'
                     results2 = evaluateGeneralParagraphRankingForAuthors(current_pickle,pickle_file_name[:-4])
-                    resFileName2 = "author_predictions/"+ pickle_file_name[:-4] + "_live_predictions_sigEdits08.csv"
+                    resFileName2 = "author_predictions/"+ pickle_file_name[:-4] + "_live_predictions_sigEdits08_simEdge.csv"
                     writeResultsToFile(results2, resFileName2)
                     print 'wrote all live par res to file'
                     
                     print 'evaluating changed pars'
                     results1 = evaluateChangesForAuthors(current_pickle,pickle_file_name[:-4])
-                    resFileName1 = "author_predictions/"+ pickle_file_name[:-4] + "_changes_predictions_sigEdits08.csv"
+                    resFileName1 = "author_predictions/"+ pickle_file_name[:-4] + "_changes_predictions_sigEdits08_simEdge.csv"
                     print 'wrote changed par res to file'
                     
                     writeResultsToFile(results1, resFileName1)
@@ -1258,7 +1246,14 @@ eval funcs end
 
 if __name__ == '__main__':
 
-    runEvalOnFolder('pickles', True)
+#     runEvalOnFolder('runPickles', False)
+    current_pickle = get_pickle("Netherlandish.pkl")
+    print len(current_pickle.revisions)
+    generateMIPpicklesForArticles(current_pickle,"Netherlandish")
+
+                    
+                    
+    
 #    runEvalOnArticle('Absolute_pitch.pkl', False)
    
     #load necessary data
