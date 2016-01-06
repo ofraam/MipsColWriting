@@ -1200,7 +1200,7 @@ def runEvalOnFolder(folderName, generateMIPs = True, removeFiles = True):
             for pickle_file_name in a[2]:
                 
             
-                current_pickle = get_pickle(pickle_file_name)
+                current_pickle = get_pickle(pickle_file_name, folderName)
                 print len(current_pickle.revisions)
 
                 try:
