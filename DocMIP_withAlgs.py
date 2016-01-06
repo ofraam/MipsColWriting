@@ -1258,7 +1258,7 @@ eval funcs end
 
 if __name__ == '__main__':
 
-    runEvalOnFolder('pickles', True)
+    runEvalOnFolder('runPickles', True)
 #    runEvalOnArticle('Absolute_pitch.pkl', False)
    
     #load necessary data
