@@ -1246,14 +1246,9 @@ eval funcs end
 
 if __name__ == '__main__':
 
-#     runEvalOnFolder('runPickles', False)
-    current_pickle = get_pickle("Netherlandish.pkl")
-    print len(current_pickle.revisions)
-    generateMIPpicklesForArticles(current_pickle,"Netherlandish")
 
-                    
-                    
-    
+    runEvalOnFolder('runPickles', True)
+
 #    runEvalOnArticle('Absolute_pitch.pkl', False)
    
     #load necessary data
