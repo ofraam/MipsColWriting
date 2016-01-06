@@ -652,11 +652,11 @@ def evaluateGeneralParagraphRankingForAuthors(articleRevisions, articleName):
                 
                 rankings = {}
                 
-                rankings["doi_alpha1_beta0"] = mip.rankLiveObjectsForUser(cur_author,alpha = 1.0, beta = 0.0,similarity="edge")
+                rankings["doi_alpha1_beta0"] = mip.rankLiveObjectsForUser(cur_author,alpha = 1.0, beta = 0.0,similarity="adamic")
                 
-                rankings["doi_alpha0_beta1"] = mip.rankLiveObjectsForUser(cur_author,alpha = 0.0, beta = 1.0,similarity="edge")
-                rankings["doi_alpha05_beta05"] = mip.rankLiveObjectsForUser(cur_author,alpha = 0.5, beta = 0.5,similarity="edge")
-                rankings["doi_alpha03_beta07"] = mip.rankLiveObjectsForUser(cur_author,alpha = 0.5, beta = 0.5,similarity="edge")
+                rankings["doi_alpha0_beta1"] = mip.rankLiveObjectsForUser(cur_author,alpha = 0.0, beta = 1.0,similarity="adamic")
+                rankings["doi_alpha05_beta05"] = mip.rankLiveObjectsForUser(cur_author,alpha = 0.5, beta = 0.5,similarity="adamic")
+                rankings["doi_alpha03_beta07"] = mip.rankLiveObjectsForUser(cur_author,alpha = 0.5, beta = 0.5,similarity="adamic")
                 listOfPars =  [ row for row in rankings["doi_alpha03_beta07"] ] 
                 
                 #generate baselines rankings: random, top edit, recently edited (TODO: language model):                
@@ -674,7 +674,7 @@ def evaluateGeneralParagraphRankingForAuthors(articleRevisions, articleName):
                 if i>0:
                     j=1
                     rankings = {}
-                    rankings["doi_alpha1_beta0"] = mip.rankLiveObjectsForUser(cur_author,alpha = 1.0, beta = 0.0,similarity="edge")
+                    rankings["doi_alpha1_beta0"] = mip.rankLiveObjectsForUser(cur_author,alpha = 1.0, beta = 0.0,similarity="adamic")
                     listOfPars =  [ row for row in rankings["doi_alpha1_beta0"] ] 
                   
                     #generate baselines rankings: random, top edit, recently edited (TODO: language model):                
@@ -693,7 +693,7 @@ def evaluateGeneralParagraphRankingForAuthors(articleRevisions, articleName):
                         j = j+1
                 if i>0:
                     rankings = {}
-                    rankings["doi_alpha1_beta0"] = mip.rankLiveObjectsForUser(cur_author,alpha = 1.0, beta = 0.0,similarity="edge")
+                    rankings["doi_alpha1_beta0"] = mip.rankLiveObjectsForUser(cur_author,alpha = 1.0, beta = 0.0,similarity="adamic")
                     listOfPars =  [ row for row in rankings["doi_alpha1_beta0"] ] 
                     #generate baselines rankings: random, top edit, recently edited (TODO: language model):                
                     rankings['random'] = generateRandomRanking(listOfPars) #random
@@ -792,10 +792,10 @@ def evaluateChangesForAuthors(articleRevisions, articleName):
                 
                 rankings = {}
                 
-                rankings["doi_alpha1_beta0"] = mip.rankChangesForUser(cur_author,last_author_revs[cur_author]+1,False,alpha = 1.0, beta = 0.0,similarity="edge")
-                rankings["doi_alpha0_beta1"] = mip.rankChangesForUser(cur_author,last_author_revs[cur_author]+1,False, alpha = 0.0, beta = 1.0,similarity="edge")
-                rankings["doi_alpha05_beta05"] = mip.rankChangesForUser(cur_author,last_author_revs[cur_author]+1,False, alpha = 0.5, beta = 0.5,similarity="edge")
-                rankings["doi_alpha03_beta07"] = mip.rankChangesForUser(cur_author,last_author_revs[cur_author]+1,False, alpha = 0.3, beta = 0.7,similarity="edge")
+                rankings["doi_alpha1_beta0"] = mip.rankChangesForUser(cur_author,last_author_revs[cur_author]+1,False,alpha = 1.0, beta = 0.0,similarity="adamic")
+                rankings["doi_alpha0_beta1"] = mip.rankChangesForUser(cur_author,last_author_revs[cur_author]+1,False, alpha = 0.0, beta = 1.0,similarity="adamic")
+                rankings["doi_alpha05_beta05"] = mip.rankChangesForUser(cur_author,last_author_revs[cur_author]+1,False, alpha = 0.5, beta = 0.5,similarity="adamic")
+                rankings["doi_alpha03_beta07"] = mip.rankChangesForUser(cur_author,last_author_revs[cur_author]+1,False, alpha = 0.3, beta = 0.7,similarity="adamic")
                 listOfChangedPars =  [ row for row in rankings["doi_alpha03_beta07"] ] 
 
 
@@ -815,7 +815,7 @@ def evaluateChangesForAuthors(articleRevisions, articleName):
                 if i>0:
                     j=1
                     rankings = {}
-                    rankings["doi_alpha1_beta0"] = mip.rankChangesForUser(cur_author,max(0,i-10),False, alpha = 1.0, beta = 0.0,similarity="edge")
+                    rankings["doi_alpha1_beta0"] = mip.rankChangesForUser(cur_author,max(0,i-10),False, alpha = 1.0, beta = 0.0,similarity="adamic")
                     listOfChangedPars =  [ row for row in rankings["doi_alpha1_beta0"] ] 
                     #generate baselines rankings: random, top edit, recently edited (TODO: language model):                
                     rankings['random'] = generateRandomRanking(listOfChangedPars) #random
@@ -832,7 +832,7 @@ def evaluateChangesForAuthors(articleRevisions, articleName):
                         j = j+1
                 if i>0:
                     rankings = {}
-                    rankings["doi_alpha1_beta0"] = mip.rankChangesForUser(cur_author,max(0,i-10),False, alpha = 1.0, beta = 0.0,similarity="edge")
+                    rankings["doi_alpha1_beta0"] = mip.rankChangesForUser(cur_author,max(0,i-10),False, alpha = 1.0, beta = 0.0,similarity="adamic")
                     listOfChangedPars =  [ row for row in rankings["doi_alpha1_beta0"] ] 
                    
                     #generate baselines rankings: random, top edit, recently edited (TODO: language model):                
