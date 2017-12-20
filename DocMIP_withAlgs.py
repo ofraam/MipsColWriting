@@ -20,7 +20,7 @@ import math
 import random
 from nltk import recall
 from nltk import precision
-
+import matplotlib.pyplot as plt
 from sklearn.metrics import precision_recall_curve
 import csv
 import traceback
@@ -1246,8 +1246,13 @@ eval funcs end
 
 if __name__ == '__main__':
 
+#     runEvalOnFolder('runPickles', False)
+    current_pickle = get_pickle("Film_noir.pkl")
+    print len(current_pickle.revisions)
+    generateMIPpicklesForArticles(current_pickle,"Film_noir")
 
-    runEvalOnFolder('runPickles', True)
+
+#     runEvalOnFolder('runPickles', True)
 
 #    runEvalOnArticle('Absolute_pitch.pkl', False)
    
@@ -1304,6 +1309,7 @@ if __name__ == '__main__':
 #    for change in rankedChanges:
 #        print str(change[0])
 #        print str(change[1])
+
 #    edgewidth=[]
 #    for (u,v,d) in mip.mip.edges(data=True):
 #        edgewidth.append(d['weight'])
@@ -1344,3 +1350,46 @@ if __name__ == '__main__':
 ##    plt.savefig('ego_graph50.png')
 #    plt.show()
     
+# =======
+#     mip = readMIPfromFile("Netherlandish", 15)
+#     edgewidth=[]
+#     for (u,v,d) in mip.mip.edges(data=True):
+#         edgewidth.append(d['weight'])
+# 
+# 
+#     userNodes = [n for (n,d) in mip.mip.nodes(True) if d['type']=='user']
+#     parDeletedNodes = []
+#     parNodes = []
+#     for (n,d) in mip.mip.nodes(True):
+#         if d['type']=='par':
+#             if d['deleted']==1:
+#                 parDeletedNodes.append(n)
+#             else:
+#                 parNodes.append(n)
+# 
+#     pos=nx.spring_layout(mip.mip)
+#     new_labels = {}
+#     for node,d in mip.mip.nodes(True):
+#         if d['type']=='user':
+#             new_labels[node]=mip.nodeIdsToUsers[node]
+#         else:
+#             new_labels[node]=node
+#     
+#     
+#     
+#     
+# #    print DegreeOfInterestMIPs(mip.mip, 3, 7)
+#     nx.draw_networkx_nodes(mip.mip,pos,nodelist=userNodes,node_size=300,node_color='red')
+#     nx.draw_networkx_nodes(mip.mip,pos,nodelist=parNodes,node_size=300,node_color='blue')
+#     nx.draw_networkx_nodes(mip.mip,pos,nodelist=parDeletedNodes, node_size=300,node_color='black')
+#     nx.draw_networkx_edges(mip.mip,pos,edgelist=mip.mip.edges(),width=edgewidth)
+#     nx.draw_networkx_labels(mip.mip,pos,new_labels)
+#     print 'clustering'
+#     print(nx.average_clustering(mip.mip, weight = "weight"))
+#     #    G=nx.dodecahedral_graph()
+# #    nx.draw(mip.mip)
+#     plt.draw()
+# #    plt.savefig('ego_graph50.png')
+#     plt.show()
+    
+
